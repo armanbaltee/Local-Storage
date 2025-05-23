@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Local Storage</title>
+</head>
+<body>
+    <div class="main-container">
+        <h2>Form data store on local storage</h2>
+
+    <form id="dataForm" onsubmit="submitData()">
+    <label for="fname">Enter First Name</label>
+    <input type="text" name="fname" id="fname" placeholder="Enter your First Name">
+    <br>
+    <label for="lname">Enter Last Name</label>
+    <input type="text" name="lname" id="lname" placeholder="Enter your Last Name">
+    <br>
+    <label for="age">Enter Your Age</label>
+    <input type="number" name="age" id="age" placeholder="Enter Your Age">
+    <br>
+    <label for="email">Enter Your Email</label>
+    <input type="email" name="email" id="email" placeholder="Enter Your Email">
+    <br>
+    <label for="s-no">Enter Your Serial No</label>
+    <input type="number" name="s-no" id="s-no" placeholder="Enter Your Serial Number">
+    <br>
+    <label for="password">Enter Your Password</label>
+    <input type="password" name="password" id="password" placeholder="Password must be more than 8 char">
+    <br>
+    <button type="submit">Submit</button>
+</form>
+
+<!-- <div id="dataContainer"></div> -->
+
+<table>
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Age</th>
+    <th>Email</th>
+    <th>Serial No</th>
+    <th>Password</th>
+  </tr>
+   <tbody id="tableBody"></tbody>
+</table>
+</div>
+
+
+    <script src="./index.js"></script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<form id="userForm">
+  <input type="text" id="userID">
+ <input type="text" id="name" placeholder="enter name">
+ <input type="text" id="password" placeholder="enter pass">
+ <br>
+ <!-- <div class="user-listing" id="userListing">
+  <p id="Fname">Fisrt Name:</p>
+  <p id="lname">Last Name:</p>
+ </div> -->
+ <table>
+  <th>
+    <tr>
+      <td>First Name</td>
+      <td>Last Name</td>
+    </tr>
+  </th>
+  <tbody id="tbody"></tbody>
+ </table>
+ <button type="submit">Save data</button>
+</form>
+<form id="findUserForm">
+  <button type="submit" >Find User</button>
+</form>
+<form id="deleteuser">
+  <button type="submit" >Delete</button>
+</form>
+  <script>
+    const form = document.getElementById('userForm')
+    const userID = document.getElementById('userID')
+    const name = document.getElementById('name')
+    const password = document.getElementById('password')
+    const findUserForm = document.getElementById('findUserForm')
+    const deleteuser = document.getElementById('deleteuser')
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault()
+      const id = userID.value
+      const Name = name.value
+      const Pass = password.value
+      let users = JSON.parse(localStorage.getItem('users')) || []
+      let newuser = {id, Name, Pass}
+      console.log(newuser)
+      let existingIndex = users.findIndex(u=> u.id===id)
+      if(existingIndex!==-1){
+        users[existingIndex] = newuser
+      }else{
+        users.push(newuser)
+      }
+      localStorage.setItem('users', JSON.stringify(users))
+      form.reset()
+       displayUser();
+    })
+    function displayUser() {
+     let users = JSON.parse(localStorage.getItem('users'))
+     console.log("users--->",users);
+     let table = document.getElementById("tbody")
+     table.innerHTML = "";
+     users.map((el)=>{
+      // console.log(el.Name)
+      let row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${el.id}</td>
+        <td>${el.Name}</td>
+        <td>${el.Pass}</td>
+      `
+      table.appendChild(row)
+     })
+    }
+    findUserForm.addEventListener('submit', (e)=>{
+      e.preventDefault()
+       const id = userID.value
+      const Name = name.value
+      const Pass = password.value
+      let users = JSON.parse(localStorage.getItem('users')) || []
+      let user = users.find(u=> u.id===id)
+      if(user){
+        userID.value = user.id
+        name.value = user.Name
+        password.value = user.Pass
+      }else{
+        alert('no user found')
+      }
+    })
+     deleteuser.addEventListener('submit', (e)=>{
+      e.preventDefault()
+       const id = userID.value
+      const Name = name.value
+      const Pass = password.value
+      let users = JSON.parse(localStorage.getItem('users')) || []
+      let indexIs = null
+      users.filter((el, index)=>{
+        if (el.id == id) {
+            indexIs = index
+        }
+      })
+      users.splice(indexIs, 1)
+      console.log(users)
+      })
+    displayUser();
+  </script>
+</body>
+</html>
